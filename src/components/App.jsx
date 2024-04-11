@@ -4,7 +4,12 @@ import Search from "./search";
 
 function App() {
   const [report, setReport] = useState([]);
+  const [result, setResult] = useState("");
 
+  const handleValue = (e) =>  {
+    setResult(e.target.value);
+    console.log(result);
+  }
   useEffect(
     () =>
       async function fetchData() {
@@ -24,7 +29,7 @@ function App() {
   );
   return (
     <div className="container mx-auto">
-      <Search />
+      <Search result={result} handleValue={handleValue} />
       <div className="container mx-auto">
         {report.map((data) => {
           return (
