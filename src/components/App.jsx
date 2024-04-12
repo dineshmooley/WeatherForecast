@@ -6,10 +6,16 @@ function App() {
   const [report, setReport] = useState([]);
   const [result, setResult] = useState("");
 
-  const handleValue = (e) =>  {
+  const filterReport = report.filter((data) => {
+    return (
+      data.ascii_name.toLowerCase().includes(result.toLowerCase()) ||
+      data.cou_name_en.toLowerCase().includes(result.toLowerCase())
+    );
+  });
+
+  const handleValue = (e) => {
     setResult(e.target.value);
-    console.log(result);
-  }
+  };
   useEffect(
     () =>
       async function fetchData() {
@@ -31,7 +37,7 @@ function App() {
     <div className="container mx-auto">
       <Search result={result} handleValue={handleValue} />
       <div className="container mx-auto">
-        {report.map((data) => {
+        {filterReport.map((data) => {
           return (
             <Entry
               key={data.geoname_id}

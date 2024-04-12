@@ -2,7 +2,7 @@ export default function Search({ result, handleValue }) {
   return (
     <div className="container my-24">
       <div className="flex justify-center">
-        <div className="flex flex-row border border-black rounded-full w-3/5 h-12 overflow-hidden">
+        <div className="flex flex-row border hover:border-black rounded-full w-3/5 h-12 overflow-hidden">
           <input
             type="search"
             className="basis-10/12 ml-2 outline-none flex justify-center"
