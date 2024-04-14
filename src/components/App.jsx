@@ -35,23 +35,20 @@ export default function App() {
   const handleValue = (e) => {
     setResult(e.target.value);
   };
-  useEffect(
-    () =>
-      async function fetchData() {
-        try {
-          const response = await fetch(
-            "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?limit=100"
-          );
-          const data = await response.json();
-          setReport(data.results);
-        } catch (err) {
-          console.log("Error fetching data :", err);
-        }
-
-        fetchData();
-      },
-    []
-  );
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?limit=100"
+        );
+        const data = await response.json();
+        setReport(data.results);
+      } catch (err) {
+        console.log("Error fetching data :", err);
+      }
+    }
+    fetchData();
+  }, []);
 
   const handleSortChange = (e) => {
     const value = e.target.value;
@@ -77,7 +74,11 @@ export default function App() {
         <label htmlFor="Sort" className="mr-2">
           Sort by:
         </label>
-        <select id="Sort" onChange={handleSortChange} className="border border-black rounded-lg">
+        <select
+          id="Sort"
+          onChange={handleSortChange}
+          className="border hover:border-black rounded-lg"
+        >
           <option value="sortNa">City</option>
           <option value="sortCn">Country</option>
           <option value="sortTl">TimeZone</option>
