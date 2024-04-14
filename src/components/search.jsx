@@ -4,7 +4,7 @@ export default function Search({ result, handleValue }) {
       <div className="flex justify-center">
         <div className="flex flex-row border hover:border-black rounded-full w-3/5 h-12 overflow-hidden">
           <input
-            type="search"
+            type="text"
             className="basis-10/12 ml-2 outline-none flex justify-center"
             placeholder="Search for the city...."
             value={result}
