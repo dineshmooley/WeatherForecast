@@ -72,7 +72,7 @@ export default function CityDetails() {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
             cityName
-          )}&appid=c5c42dd3f124e401c56a4a19aaaedbe1`
+          )}&appid=${process.env.REACT_APP_API_KEY}`
         );
         const data = await response.json();
         setDetails(data);
@@ -90,7 +90,7 @@ export default function CityDetails() {
 
   return (
     <div className="bg-green-200 h-[100vh]">
-      <div className="container my-auto">
+      <div className="container mx-auto">
         <div className="flex justify-center ">
           <div className="text-3xl">{details.name}</div>
         </div>
