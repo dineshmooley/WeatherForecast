@@ -14,7 +14,7 @@ const Search: React.FC<SearchData> = ({ result, handleValue }) => {
             type="text"
             className="basis-10/12 outline-none p-2 flex justify-center "
             placeholder="Search for the city...."
-            value={result as string}
+            value={String(result)}
             onChange={(e) => handleValue(e)}
           />
           <button className="text-2xl basis-2/12 pb-2 bg-red-300">

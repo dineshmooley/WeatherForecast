@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 interface EntryData {
+  key: number;
   name: string;
   timezone: string;
   country: string;
