@@ -5,7 +5,7 @@ export default function Search({ result, handleValue }) {
         <div className="flex flex-row border hover:border-black rounded-full w-3/5 h-12 overflow-hidden">
           <input
             type="text"
-            className="basis-10/12 ml-2 outline-none flex justify-center"
+            className="basis-10/12 outline-none ml-2 flex justify-center"
             placeholder="Search for the city...."
             value={result}
             onChange={(e) => handleValue(e)}

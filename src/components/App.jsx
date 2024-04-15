@@ -68,34 +68,36 @@ export default function App() {
   };
 
   return (
-    <div className="container mx-auto">
-      <Search result={result} handleValue={handleValue} />
-      <div className="mb-2">
-        <label htmlFor="Sort" className="mr-2">
-          Sort by:
-        </label>
-        <select
-          id="Sort"
-          onChange={handleSortChange}
-          className="border hover:border-black rounded-lg"
-        >
-          <option value="sortNa">City</option>
-          <option value="sortCn">Country</option>
-          <option value="sortTl">TimeZone</option>
-        </select>
-      </div>
-      <hr />
-      <div className="mt-2">
-        {filterReport.map((data) => {
-          return (
-            <Entry
-              key={data.geoname_id}
-              timezone={data.timezone}
-              name={data.ascii_name}
-              country={data.cou_name_en}
-            />
-          );
-        })}
+    <div>
+      <div className="container mx-auto">
+        <Search result={result} handleValue={handleValue} />
+        <div className="mb-2">
+          <label htmlFor="Sort" className="mr-2">
+            Sort by:
+          </label>
+          <select
+            id="Sort"
+            onChange={handleSortChange}
+            className="border hover:border-black rounded-lg"
+          >
+            <option value="sortNa">City</option>
+            <option value="sortCn">Country</option>
+            <option value="sortTl">TimeZone</option>
+          </select>
+        </div>
+        <hr />
+        <div className="mt-2">
+          {filterReport.map((data) => {
+            return (
+              <Entry
+                key={data.geoname_id}
+                timezone={data.timezone}
+                name={data.ascii_name}
+                country={data.cou_name_en}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
