@@ -72,7 +72,7 @@ export default function CityDetails() {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
             cityName
-          )}&appid=${process.env.REACT_APP_API_KEY}`
+          )}&appid=c5c42dd3f124e401c56a4a19aaaedbe1`
         );
         const data = await response.json();
         setDetails(data);
