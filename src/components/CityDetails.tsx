@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   WiCloud,
   WiDaySunny,
@@ -15,34 +15,60 @@ import {
   WiSunset,
 } from "react-icons/wi";
 import { useParams } from "react-router-dom";
-export default function CityDetails() {
-  const { cityName } = useParams();
-  const [details, setDetails] = useState({});
 
-  function renderWeatherIcon(weatherId) {
+interface WeatherData {
+  name: string;
+  main: {
+    temp: number;
+    humidity: number;
+    pressure: number;
+    temp_max: number;
+    temp_min: number;
+  };
+  wind: {
+    speed: number;
+  };
+  weather: {
+    id: number;
+    description: string;
+  }[];
+}
+
+interface Params {
+  cityName: string;
+  [key: string]: string | undefined;
+}
+
+export default function CityDetails() {
+  const { cityName } = useParams<Params>();
+  const [details, setDetails] = useState<WeatherData | null>(null);
+
+  function renderWeatherIcon(weatherId: number) {
+    const iconSize = 48;
     switch (true) {
       case weatherId >= 200 && weatherId < 300:
-        return <WiDayThunderstorm size="xl" className="text-yellow-500" />;
+        return <WiDayThunderstorm size={iconSize} className="text-blue-500" />;
       case weatherId >= 300 && weatherId < 400:
-        return <WiDayShowers size="xl" className="text-blue-500" />;
+        return <WiDayShowers size={iconSize} className="text-blue-500" />;
       case weatherId >= 500 && weatherId < 600:
-        return <WiDayRain size="xl" className="text-blue-500" />;
+        return <WiDayRain size={iconSize} className="text-blue-500" />;
       case weatherId >= 600 && weatherId < 700:
-        return <WiDaySnow size="xl" className="text-blue-500" />;
+        return <WiDaySnow size={iconSize} className="text-blue-500" />;
       case weatherId >= 700 && weatherId < 800:
-        return <WiDayFog size="xl" className="text-blue-500" />;
+        return <WiDayFog size={iconSize} className="text-blue-500" />;
       case weatherId === 800:
-        return <WiDaySunny size="xl" className="text-blue-500" />;
+        return <WiDaySunny size={iconSize} className="text-blue-500" />;
       case weatherId === 801:
-        return <WiDayCloudy size="xl" className="text-blue-500" />;
+        return <WiDayCloudy size={iconSize} className="text-blue-500" />;
       default:
-        return <WiCloud size="xl" className="text-blue-500" />;
+        return <WiCloud size={iconSize} className="text-blue-500" />;
     }
   }
 
   useEffect(() => {
     async function fetchData() {
       try {
+        if (!cityName) return;
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
             cityName
@@ -57,8 +83,13 @@ export default function CityDetails() {
 
     fetchData();
   }, [cityName]);
+
+  if (!details) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
+    <div className="bg-green-200 h-[100vh]">
       <div className="container my-auto">
         <div className="flex justify-center ">
           <div className="text-3xl">{details.name}</div>
